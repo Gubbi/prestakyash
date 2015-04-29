@@ -1,0 +1,1 @@
+<span class="kyash_error">{$error}</span>

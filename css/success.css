@@ -1,0 +1,45 @@
+#see_nearby_shops_container{
+	max-height:250px;
+	overflow:auto;
+}
+.kyash_succcess_instructions{
+	margin-top:20px;
+	padding-top:10px
+}
+.kyash_succcess_instructions2{
+	margin-top:20px;
+}
+#see_nearby_shops_container{
+	margin-top:10px;
+	margin-bottom:20px;
+}
+#kyash_postcode_payment{
+	margin-left:10px;
+}
+#kyash_postcode_payment  a{
+	font-size:11px;
+	float:none;
+}
+#kyash_postcode_payment_sub{
+	margin-left:5px;
+	display:none;
+}
+#kyash_postcode_payment_sub label{
+	font-size:11px;
+	min-width:45px;
+	padding:0;
+}
+#kyash_postcode_payment_sub input{
+	text-align: center;
+	width: 110px;
+	font-size:11px;
+}
+#kyash_postcode_button{
+	padding-top: 2px;
+	font-size: 12px;
+	height: 24px;
+}
+.kyash_heading{
+	font-weight: bold;
+	font-size: 22px
+}
