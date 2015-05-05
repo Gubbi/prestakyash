@@ -3,7 +3,7 @@ class KyashHandlerModuleFrontController extends ModuleFrontController
 {
 	public function postProcess()
 	{
-		$api = $this->module->getKyashApiInstance(Configuration::get('kyash_public_api_id'),Configuration::get('kyash_callback_secret'),Configuration::get('kyash_hmac_secret'));
+		$api = $this->module->getKyashApiInstance(Configuration::get('kyash_public_api_id'),Configuration::get('kyash_api_secret'), Configuration::get('kyash_callback_secret'), Configuration::get('kyash_hmac_secret'));
 		$api->setLogger($this->module);
 		
 		$params = array();
@@ -32,7 +32,7 @@ $this->module->log('Kyash Code:'.$this->module->getKyashOrder($order_id,'kyash_c
 		{
 			$url = $this->context->link->getModuleLink('kyash', 'handler');
 			$updater = new KyashUpdater($order,$this->module,$order_id);
-			$api->handler($params,$this->module->getKyashOrder($order_id,'kyash_code'),$this->module->getKyashOrder($order_id,'kyash_status'),$url,$updater);
+			$api->callback_handler($params,$this->module->getKyashOrder($order_id,'kyash_code'),$this->module->getKyashOrder($order_id,'kyash_status'),$url,$updater);
 		}
 	}
 }

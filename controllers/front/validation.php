@@ -28,7 +28,7 @@ class KyashValidationModuleFrontController extends ModuleFrontController
 		if (!Validate::isLoadedObject($customer))
 			Tools::redirect('index.php?controller=order&step=1');
 		
-		$api = $this->module->getKyashApiInstance(Configuration::get('kyash_public_api_id'),Configuration::get('kyash_api_secret'));
+		$api = $this->module->getKyashApiInstance(Configuration::get('kyash_public_api_id'),Configuration::get('kyash_api_secret'), Configuration::get('kyash_callback_secret'), Configuration::get('kyash_hmac_secret'));
 		$api->setLogger($this->module);
 		$params = $this->getOrderParams($cart);
 		$response = $api->createKyashCode($params);
@@ -44,7 +44,7 @@ class KyashValidationModuleFrontController extends ModuleFrontController
 			$total = (float)$cart->getOrderTotal(true, Cart::BOTH);
 			$paymentName = $this->module->displayName.', Kyash Code: '.$response['id'];
 			$this->module->validateOrder($cart->id, Configuration::get('PS_OS_PREPARATION'), $total, $paymentName, NULL, NULL, (int)$currency->id, false, $customer->secure_key);
-			$this->module->addKyashOrder($cart->id,$this->module->currentOrder,$response['id']);
+			$this->module->addKyashOrder($cart->id,$this->module->currentOrder,$response['id'],$response['expires_on']);
 			Tools::redirect('index.php?controller=order-confirmation&id_cart='.$cart->id.'&id_module='.$this->module->id.'&id_order='.$this->module->currentOrder.'&key='.$customer->secure_key);
 		}
 	}
