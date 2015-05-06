@@ -5,9 +5,10 @@ class KyashPay {
     public $key = '';
     public $secret = '';
     public $hmac = NULL;
+    public $callback_secret = NULL;
     public $logger = NULL;
 
-    public function __construct($key, $secret, $callback_secret = NULL, $hmac = NULL) {
+    public function __construct($key, $secret, $callback_secret, $hmac) {
         $this->key = $key;
         $this->secret = $secret;
         $this->callback_secret = $callback_secret;
@@ -69,8 +70,12 @@ class KyashPay {
             }
 
             $normalized_request_string = '';
+            ksort($_REQUEST);
             foreach ($_REQUEST as $key => $value) {
-                $normalized_request_string .= empty($normalized_request_string)? '' : '&';
+                if($key == 'route') {
+                    continue;
+                }
+                $normalized_request_string .= empty($normalized_request_string)? '' : '%26';
                 $normalized_request_string .= urlencode(utf8_encode($key) . '=' . utf8_encode($value));
             }
 
