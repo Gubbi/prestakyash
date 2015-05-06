@@ -244,6 +244,13 @@ class Kyash extends PaymentModule
                 }
                 else if($order_state->id == Configuration::get('PS_OS_SHIPPING'))
                 {
+                    $server_kc = $api->getKyashCode($kyash_code);
+                    if (isset($server_kc['status']) && $server_kc['status'] !== 'error') {
+                        if ($kyash_status !== $server_kc['status']) {
+                            $this->updateKyashOrder($id_order,'kyash_status',$server_kc['status']);
+                            $kyash_status = $server_kc['status'];
+                        }
+                    }
                     if($kyash_status == 'pending')
                     {
                         $response = $api->cancel($kyash_code);
