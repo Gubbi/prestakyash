@@ -1,3 +1,4 @@
+# prestakyash
 PrestaShop Integration Kit for the [Kyash Payment Gateway](http://www.kyash.com/).
 
 ## Installation
