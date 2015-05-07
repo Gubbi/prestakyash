@@ -11,7 +11,7 @@ class KyashPaypointsModuleFrontController extends ModuleFrontController
 		$pincode = Tools::getValue('postcode');
 		$success = Tools::getValue('success');
 		
-		$api = $this->module->getKyashApiInstance(Configuration::get('kyash_public_api_id'),Configuration::get('kyash_api_secret'));
+		$api = $this->module->getKyashApiInstance(Configuration::get('kyash_public_api_id'),Configuration::get('kyash_api_secret'), Configuration::get('kyash_callback_secret'), Configuration::get('kyash_hmac_secret'));
 		$api->setLogger($this->module);
 		$response = $api->getPaymentPoints($pincode);
 		if(isset($response['status']) && $response['status'] == 'error')

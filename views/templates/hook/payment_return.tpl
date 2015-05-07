@@ -14,6 +14,7 @@
 
 <div class="kyash_succcess_instructions" style="border-top:1px solid #ededed;">
     <span class="kyash_heading">Kyash Code: {$kyash_code}</span>
+    <p><span>Kyashcode expires on {$expires_on}</span></p>
 </div>
 <div class="kyash_succcess_instructions2">
     <p>{$instructions|nl2br}</p>
