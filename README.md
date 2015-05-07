@@ -2,7 +2,7 @@ PrestaShop Integration Kit for the [Kyash Payment Gateway](http://www.kyash.com/
 
 ## Installation
 1. Login to your Admin Dashboard.
-2. Go to `Modules` pages. On the top right of window select option cleck `Add a new module`
+2. Go to `Modules` page. On the top right of window select option `Add a new module`
 3. In the `ADD A NEW MODULE` section upload the [prestakyash.zip](https://github.com/Gubbi/prestakyash/archive/v1.0.zip) file.
 4. On this page you can find *Kyash* under `Payments and Gateway` list. Click on `Install` to proceed the installation.
 5. Once finished, the *Kyash Settings* page appears. Here you need to fill your Kyash Account credentials, that is explained in the below section.
