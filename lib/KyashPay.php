@@ -7,6 +7,8 @@ class KyashPay {
     public $hmac = NULL;
     public $callback_secret = NULL;
     public $logger = NULL;
+    public $use_https = true;
+
 
     public function __construct($key, $secret, $callback_secret, $hmac) {
         $this->key = $key;
@@ -68,23 +70,8 @@ class KyashPay {
                 header("HTTP/1.1 401 Unauthorized");
                 return;
             }
-
-            $normalized_request_string = '';
-            ksort($_REQUEST);
-            foreach ($_REQUEST as $key => $value) {
-                if($key == 'route') {
-                    continue;
-                }
-                $normalized_request_string .= empty($normalized_request_string)? '' : '%26';
-                $normalized_request_string .= urlencode(utf8_encode($key) . '=' . utf8_encode($value));
-            }
-
-            //prepare request signature
-            $request = urlencode('POST') . '&' . urlencode($req_url) . '&' . $normalized_request_string;
-            $this->log('Normalized request string:' . $request);
-
-            $signature = base64_encode(hash_hmac('sha256', $request, $this->hmac, true));
-            $prepared_signature = "HMAC " . base64_encode($this->key . ":" . $signature);
+            
+            $prepared_signature = $this->signature('POST', $req_url, $_REQUEST);
             $this->log($authorization . '\n' . $prepared_signature);
 
             if ($authorization !== $prepared_signature) {
@@ -126,13 +113,62 @@ class KyashPay {
         $this->logger = $object;
     }
 
+    public function parse_qs($data)
+    {
+        $data = preg_replace_callback('/(?:^|(?<=&))[^=[]+/', function($match) {
+            return bin2hex(urldecode($match[0]));
+        }, $data);
+
+        parse_str($data, $values);
+
+        return array_combine(array_map('hex2bin', array_keys($values)), $values);
+    }
+
+    public function signature($method, $url, $data){
+        $tmp_data = array();
+        $request = urlencode($method) . '&' . urlencode($url) . '&';
+        
+        if($data){
+            $assoc_data = is_array($data) ? $data : $this->parse_qs($data);
+            ksort($assoc_data);
+            foreach ($assoc_data as $key => $value) {
+                if($key == 'route' || $key == 'action') {
+                    continue;
+                }
+                $tmp_data[$key] = $value;
+            }
+            $query_data = http_build_query($tmp_data);
+            $request = $request . urlencode(utf8_encode(str_replace(array( '+','~' ), array('%20', '%7E'), $query_data)));
+        }
+        
+        //prepare request signature
+        $this->log('Normalized request string:' . $request);
+
+        $signature = base64_encode(hash_hmac('sha256', $request, $this->hmac, true));
+        $prepared_signature = "HMAC " . base64_encode($this->key . ":" . $signature);
+
+        return $prepared_signature;
+    }
+
     public function api_request($url, $data = NULL) {
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_TIMEOUT, 30);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, TRUE);
-        curl_setopt($curl, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
-        curl_setopt($curl, CURLOPT_USERPWD, $this->key . ':' . $this->secret);
+        curl_setopt($curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+
+        if($this->use_https){
+            curl_setopt($curl, CURLOPT_SSLVERSION, 1);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, TRUE);
+            curl_setopt($curl, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
+            curl_setopt($curl, CURLOPT_USERPWD, $this->key . ':' . $this->secret);
+        }
+        else {
+            $method = $data ? 'POST' : 'GET';
+            $auth_str = $this->signature($method, $url, $data);
+            curl_setopt($curl,CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: ' . $auth_str));
+        }
+
         if($data) {
             curl_setopt($curl, CURLOPT_POST, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
