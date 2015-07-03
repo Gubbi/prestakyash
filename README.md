@@ -28,11 +28,12 @@ PrestaShop Integration Kit for the [Kyash Payment Gateway](http://www.kyash.com/
 ## Troubleshooting
 
 ### SSL Issue
-By default HTTPS scheme is used. If there are any SSL issue, alternatively you can use HTTP scheme as explained below.
+By default HTTPS scheme is used. If there are any SSL issues, you can fix them as below:
+
 1. Go to `modules`->`kyash`->`lib` from root folder.
 2. Open `KyashPay.php` file.
-3. Replace this line `private static $baseUri = 'https://api.kyash.in/v1';` with `private static $baseUri = 'http://api.kyash.in/v1';`.
-4. Also replace `public $use_https = true;` as `public $use_https = false;`.
+3. Replace the line ```private static $baseUri = 'https://api.kyash.in/v1';``` with ```private static $baseUri = 'http://api.kyash.in/v1';```.
+4. And change ```public $use_https = true;``` to ```public $use_https = false;```.
 
 
 ## Support
