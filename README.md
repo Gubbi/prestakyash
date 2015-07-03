@@ -4,7 +4,7 @@ PrestaShop Integration Kit for the [Kyash Payment Gateway](http://www.kyash.com/
 ## Installation
 1. Login to your Admin Dashboard.
 2. Go to `Modules` page. On the top right of window select option `Add a new module`
-3. In the `ADD A NEW MODULE` section upload the [prestakyash.zip](https://github.com/Gubbi/prestakyash/archive/v1.0.zip) file.
+3. In the `ADD A NEW MODULE` section upload the [prestakyash.zip](https://github.com/Gubbi/prestakyash/releases/download/v1.1/Prestashop_Kyash_0.1.6.zip) file.
 4. On this page you can find *Kyash* under `Payments and Gateway` list. Click on `Install` to proceed the installation.
 5. Once finished, the *Kyash Settings* page appears. Here you need to fill your Kyash Account credentials, that is explained in the below section.
 
@@ -24,6 +24,13 @@ PrestaShop Integration Kit for the [Kyash Payment Gateway](http://www.kyash.com/
 6. Enter the KyashCode in the search box.
 7. You should see a `Mark as Paid` button there.
 8. Clicking this should change the order status from *Processing in progress* to *Payment accepted* in your PrestaShop order details page.
+
+## Troubleshooting
+By default HTTPS scheme is used. If there are any SSL issue, alternatively you can use HTTP scheme as explained below.
+1. Go to `modules`->`kyash`->`lib` from root folder.
+2. Open `KyashPay.php` file.
+3. Replace this line `private static $baseUri = 'https://api.kyash.in/v1';` with `private static $baseUri = 'http://api.kyash.in/v1';`.
+4. Also replace `public $use_https = true;` as `public $use_https = false;`.
 
 ## Support
 Contact developers@kyash.com for any issues you might be facing with this Kyash extension or call +91 8050114225.
