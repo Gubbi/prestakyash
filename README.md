@@ -26,11 +26,14 @@ PrestaShop Integration Kit for the [Kyash Payment Gateway](http://www.kyash.com/
 8. Clicking this should change the order status from *Processing in progress* to *Payment accepted* in your PrestaShop order details page.
 
 ## Troubleshooting
+
+### SSL Issue
 By default HTTPS scheme is used. If there are any SSL issue, alternatively you can use HTTP scheme as explained below.
 1. Go to `modules`->`kyash`->`lib` from root folder.
 2. Open `KyashPay.php` file.
 3. Replace this line `private static $baseUri = 'https://api.kyash.in/v1';` with `private static $baseUri = 'http://api.kyash.in/v1';`.
 4. Also replace `public $use_https = true;` as `public $use_https = false;`.
+
 
 ## Support
 Contact developers@kyash.com for any issues you might be facing with this Kyash extension or call +91 8050114225.
