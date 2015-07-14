@@ -31,8 +31,8 @@ p.payment_module a.kyash{
 </p>
 
 <script>
-var url = "{$link->getModuleLink('kyash', 'paypoints')|escape:'html'}";
-var validation_url = "{$link->getModuleLink('kyash', 'validation')|escape:'html'}";
+var url = "{$link->getModuleLink('kyash', 'paypoints')}";
+var validation_url = "{$link->getModuleLink('kyash', 'validation')}";
 var loader = "<img src='{$img_path}loader.gif' alt='Processing...' />";
 </script>
 <script src="{$this_path}js/payment.js" type="text/javascript"></script>
