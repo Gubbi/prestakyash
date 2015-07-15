@@ -26,7 +26,7 @@
 <div style="display: none" id="see_nearby_shops_container" class="content">
 </div>
 <script>
-var url = "{$link->getModuleLink('kyash', 'paypoints')|escape:'html'}";
+var url = "{$link->getModuleLink('kyash', 'paypoints')}";
 var loader = "<img src='{$img_path}loader.gif' alt='Processing...' />";
 </script>
 <script src="{$this_path}js/success.js" type="text/javascript"></script>

@@ -324,19 +324,19 @@ class Kyash extends PaymentModule
                         'name' => 'public_api_id',
                     ),
                     array(
-                        'type' => 'password',
+                        'type' => 'text',
                         'label' => $this->l('API Secret'),
                         'desc' => $this->l('You authenticate to Kyash server by using one of these API Secrets in the request. This detail should be treated as a secret and never to be shared. You can manage them from your account and have multiple API Secrets active at one time.'),
                         'name' => 'api_secret',
                     ),
                     array(
-                        'type' => 'password',
+                        'type' => 'text',
                         'label' => $this->l('Callback Secret'),
                         'desc' => $this->l('Used by the Kyash Server to authenticate itself during API callbacks over HTTPS. This detail should be treated as a secret and never to be shared. Only one Callback Secret is generated per Merchant. It can be changed from your account.'),
                         'name' => 'callback_secret',
                     ),
                     array(
-                        'type' => 'password',
+                        'type' => 'text',
                         'label' => $this->l('HMAC Secret'),
                         'desc' => $this->l('Used by the Kyash Server to authenticate itself during API callbacks over HTTP. This detail should be treated as a secret and never to be shared. Only one HMAC Secret is generated per Merchant. It can be changed from your account.'),
                         'name' => 'hmac_secret',
@@ -390,7 +390,7 @@ class Kyash extends PaymentModule
         return array(
             'public_api_id' => Tools::getValue('public_api_id', Configuration::get('kyash_public_api_id')),
             'api_secret' => Tools::getValue('api_secret', Configuration::get('kyash_api_secret')),
-            'call_secret' => Tools::getValue('callback_secret', Configuration::get('kyash_callback_secret')),
+            'callback_secret' => Tools::getValue('callback_secret', Configuration::get('kyash_callback_secret')),
             'hmac_secret' => Tools::getValue('hmac_secret', Configuration::get('kyash_hmac_secret')),
             'instructions' => Tools::getValue('instructions', Configuration::get('kyash_instructions')),
             'callback_url' => $this->context->link->getModuleLink('kyash', 'handler'),
