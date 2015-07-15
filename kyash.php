@@ -15,7 +15,7 @@ class Kyash extends PaymentModule
     {
         $this->name = 'kyash';
         $this->tab = 'payments_gateways';
-        $this->version = '0.1.5';
+        $this->version = '0.1.7';
         $this->author = 'Kyash';
         $this->controllers = array('validation');
 
