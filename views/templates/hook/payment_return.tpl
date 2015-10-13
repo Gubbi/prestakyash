@@ -20,8 +20,8 @@
     <p>{$instructions|nl2br}</p>
 </div>
 <div class="kyash_succcess_instructions2">
-    <input type="text" class="input-text" id="postcode" value="{$postcode}" maxlength="13" style="width:120px; text-align:center"  />
-    <input type="button" class="button" id="kyash_postcode_button" value="See nearby shops" onclick="preparePullShops()">
+    <input type="hidden" class="input-text" id="postcode" value="{$postcode}" maxlength="13" style="width:120px; text-align:center"  />
+    <!--input type="button" class="button" id="kyash_postcode_button" value="See nearby shops" onclick="preparePullShops()"-->
 </div>
 <div style="display: none" id="see_nearby_shops_container" class="content">
 </div>

@@ -16,7 +16,7 @@ p.payment_module a.kyash{
         <span id="kyash_open">See nearby shops</span>
         
         <span id="kyash_postcode_payment_sub">
-            <input type="text" class="input-text" id="kyash_postcode" value="{$postcode}" maxlength="13" />
+            <input type="hidden" class="input-text" id="kyash_postcode" value="{$postcode}" maxlength="13" />
             <button id="kyash_postcode_button" class="button" type="button">
                 <span><span>See Nearby Shops</span></span>
             </button>

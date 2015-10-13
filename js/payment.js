@@ -44,14 +44,14 @@ $(document).ready(function(){
 });
 function openShops()
 {
-	$("#kyash_postcode_payment_sub").show();
+	//$("#kyash_postcode_payment_sub").show();
 	$("#see_nearby_shops_container").hide();
 	$("#kyash_open").hide();
 	pullNearByShops();
 }
 function closeShops()
 {
-	$("#kyash_postcode_payment_sub").show();
+	//$("#kyash_postcode_payment_sub").show();
 	$("#see_nearby_shops_container").hide();
 
 	$("#kyash_open").hide();
